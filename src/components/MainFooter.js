@@ -11,7 +11,11 @@ const MainFooter = ({ todoList, setTodoList, status, setStatus }) => {
     <footer className="footer">
       <span className="todo-count">
         <strong>
-          {status === "completed" ? completed.length : unCompleted.length}{" "}
+          {status === "completed"
+            ? completed.length
+            : status === "active"
+            ? unCompleted.length
+            : todoList.length}{" "}
         </strong>
         items left
       </span>
@@ -46,12 +50,14 @@ const MainFooter = ({ todoList, setTodoList, status, setStatus }) => {
         </li>
       </ul>
 
-      <button
-        className={completed === 0 ? "hidden" : "clear-completed"}
-        onClick={clearCompleted}
-      >
-        Clear completed
-      </button>
+      {completed.length > 0 && (
+        <button
+          className={completed === 0 ? "hidden" : "clear-completed"}
+          onClick={clearCompleted}
+        >
+          Clear completed
+        </button>
+      )}
     </footer>
   );
 };
